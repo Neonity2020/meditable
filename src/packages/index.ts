@@ -10,9 +10,11 @@ import StateToPlainText from "./modules/state/stateToPlainText";
 import { tokenizer } from "./modules/content/inlineRenderers/tokenizer";
 import { flattenToOutline, filterOutline} from "./utils/outline";
 import MEPlugin from "./modules/plugin";
+import { markdownToHtml, htmlToMarkdown } from "./utils/markdownHtml";
 
 
-export { HTMLParser, MarkdownToState, StateToMarkdown, HtmlToMarkdown, StateToHtml, StateToPlainText, tokenizer, filterOutline, flattenToOutline }
+export { HTMLParser, MarkdownToState, StateToMarkdown, HtmlToMarkdown, StateToHtml, StateToPlainText, tokenizer, filterOutline, flattenToOutline, markdownToHtml, htmlToMarkdown }
+export type { MarkdownToHtmlOptions } from "./utils/markdownHtml";
 
 
 export const DEFAULT_OPTIONS: MEOptions = {

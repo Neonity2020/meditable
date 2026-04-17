@@ -1,13 +1,13 @@
 {
   "name": "@geekeditor/meditable",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "A WYSIWYG markdown editor for web browser applications",
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
   "types": "./dist/types/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "https://github.com/geekeditor/meditable"
+    "url": "git+https://github.com/geekeditor/meditable.git"
   },
   "bugs": "https://github.com/geekeditor/meditable/issues",
   "homepage": "https://github.com/geekeditor/meditable#readme",
