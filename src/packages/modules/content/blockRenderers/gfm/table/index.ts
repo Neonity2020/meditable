@@ -35,10 +35,11 @@ export class METableTrRenderer extends MEBlockRenderer {
 
 export default class METableRenderer extends MEBlockRenderer {
     static type: MEBlockType = "table";
+    static tagName: string = 'table';
     updateContent(checkUpdate?: boolean): boolean {
         if (!this.nodes.el) {
             this.nodes.el = this.make('figure');
-            this.nodes.holder = this.make('table', [CLASS_NAMES.ME_TASK_LIST_ITEM_CONTENT]);
+            this.nodes.holder = this.make('table');
             this.nodes.el.appendChild(this.nodes.holder);
         }
         return true;
