@@ -56,14 +56,25 @@ const parseSelector = (str = '') => {
     return { tag, id, className, isVoid }
 }
 
+/** 仅替换标签外的文本中的空格，避免破坏属性里的空格或已有实体 */
+const spacesToNbspOutsideTags = (html: string) =>
+    html
+        .split(/(<[^>]+>)/)
+        .map((segment) =>
+            segment.startsWith('<') && segment.endsWith('>')
+                ? segment
+                : segment.replace(/ /g, '&nbsp;')
+        )
+        .join('')
 
 export default class MECodeRenderer extends MEBlockRenderer {
     static type: MEBlockType = "code";
     static tagName: string = 'code';
 
     static async staticRender({ data }: MEBlockRendererStaticRenderOptions): Promise<string> {
-        const innerHTML = highlight(data.meta.lang, data.text)
-        return `<${this.tagName} class="${this.type} lang-${data.meta.lang}"><span style="display: block;white-space: pre-wrap;word-break: break-word;">${innerHTML.value || ''}</span></${this.tagName}>`
+        const { value = '' } = highlight(data.meta.lang, data.text)
+        const innerHTML = spacesToNbspOutsideTags(value)
+        return `<${this.tagName} class="${this.type} lang-${data.meta.lang}"><span style="display: block;white-space: pre-wrap;word-break: break-word;">${innerHTML}</span></${this.tagName}>`
     }
 
     get lang() {

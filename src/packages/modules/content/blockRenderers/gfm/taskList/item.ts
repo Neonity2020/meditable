@@ -8,7 +8,7 @@ export default class METaskListItemRenderer extends MEBlockRenderer {
         const checked = !!data.meta.checked
         const checkBoxClassName = `${this.type}-checkbox`
         const contentClassName = `${this.type}-content`
-        const checkBoxCheckedClassName = `${this.type}-checkbox-checked`
+        const checkBoxCheckedClassName = `${this.type}-checkbox--checked`
         const classNames = [checkBoxClassName]
         if(checked) {
             classNames.push(checkBoxCheckedClassName)
