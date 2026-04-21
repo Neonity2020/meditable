@@ -38,6 +38,7 @@ export default class MEBlockRenderer extends MEEventHandler {
     static renders: { [type: string]: MEBlockRendererConstructable } = {}
     static type: MEBlockType = "staff";
     static tagName: string = "section";
+    static customClassName: string = "";
     block!: MEBlockInstance;
     children: MENodeInstance[] = [];
 
@@ -51,7 +52,7 @@ export default class MEBlockRenderer extends MEEventHandler {
     }
 
     static async staticRender({ innerHTML }: MEBlockRendererStaticRenderOptions): Promise<string> {
-        return `<${this.tagName} class="${this.type}">${innerHTML || ''}</${this.tagName}>`
+        return `<${this.tagName} class="${[this.type, this.customClassName].filter(Boolean).join(' ')}">${innerHTML || ''}</${this.tagName}>`
     }
 
     constructor(instance: MEBlockInstance) {

@@ -1,4 +1,4 @@
-import { MEBlockData, MEBlockInstance, MEBlockType } from "@/packages/types";
+import { MEBlockData, MEBlockInstance, MEBlockRendererStaticRenderOptions, MEBlockType } from "@/packages/types";
 import MEBlockRenderer from "../../renderer";
 import { CLASS_NAMES } from "@/packages/utils/classNames";
 import { generateId } from "@/packages/utils/utils";
@@ -36,6 +36,9 @@ export class METableTrRenderer extends MEBlockRenderer {
 export default class METableRenderer extends MEBlockRenderer {
     static type: MEBlockType = "table";
     static tagName: string = 'table';
+    static async staticRender({ innerHTML }: MEBlockRendererStaticRenderOptions): Promise<string> {
+        return `<figure class="table-block"><${this.tagName} class="${[this.type, this.customClassName].filter(Boolean).join(' ')}">${innerHTML || ''}</${this.tagName}></figure>`
+    }
     updateContent(checkUpdate?: boolean): boolean {
         if (!this.nodes.el) {
             this.nodes.el = this.make('figure');

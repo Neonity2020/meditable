@@ -4,6 +4,7 @@ import MEBlockRenderer from "../../renderer";
 export default class MECodeBlockRenderer extends MEBlockRenderer {
     static type: MEBlockType = "code-block";
     static tagName: string = 'pre';
+    static customClassName: string = "hljs code__pre";
 
     updateContent() {
         super.updateContent()

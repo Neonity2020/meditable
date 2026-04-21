@@ -74,7 +74,9 @@ export default class MECodeRenderer extends MEBlockRenderer {
     static async staticRender({ data }: MEBlockRendererStaticRenderOptions): Promise<string> {
         const { value = '' } = highlight(data.meta.lang, data.text)
         const innerHTML = spacesToNbspOutsideTags(value)
-        return `<${this.tagName} class="${this.type} lang-${data.meta.lang}"><span style="display: block;white-space: pre-wrap;word-break: break-word;">${innerHTML}</span></${this.tagName}>`
+        // return `<${this.tagName} class="${this.type} ${this.customClassName} lang-${data.meta.lang}"><span style="display: block;white-space: pre-wrap;word-break: break-word;">${innerHTML}</span></${this.tagName}>`
+        // fix: remove span tag
+        return `<${this.tagName} class="${[this.type, this.customClassName].filter(Boolean).join(' ')} lang-${data.meta.lang}">${innerHTML}</${this.tagName}>`
     }
 
     get lang() {
