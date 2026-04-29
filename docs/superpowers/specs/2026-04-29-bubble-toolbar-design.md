@@ -304,8 +304,10 @@ window.scroll / resize  → Plugin.handleScroll()  (rAF 节流)
         │
         ▼
 if (!toolbar.visible) return
-const rect = currentRange.getBoundingClientRect()
-if (rect 完全在视口外 || range.collapsed)  → hide
+const range = selection.getRangeAt(0)              // 滚动时实时取
+if (!range || range.collapsed)             → hide
+const rect = range.getBoundingClientRect()
+if (rect 完全在视口外)                      → hide
 else                                       → toolbar.show(rect, lastActiveMap)
 ```
 
@@ -354,7 +356,7 @@ else                                       → toolbar.show(rect, lastActiveMap)
 | 场景 | 行为 |
 |---|---|
 | 选区跨多个 block | 仍显示;`getActiveMap` 多 block 取交集(任一片段不含 → 非激活) |
-| 选区落在 `code_block` / `math_block` / `frontmatter` 等不可格式化 block | toolbar 不显示。黑名单维护在 `BLACKLIST_BLOCK_TYPES` |
+| 选区落在 `code_block` / `math_block` / `frontmatter` 等不可格式化 block | toolbar 不显示。黑名单 `BLACKLIST_BLOCK_TYPES = ['code_block', 'math_block', 'diagram_block', 'html_block', 'frontmatter']`,在 `buttons.ts` 中以常量形式导出,方便后续扩展 |
 | 选区在 `inline_code` / `inline_math` 内部 | toolbar 显示,但只激活当前类型按钮,其他按钮 disabled |
 | 选区只含空白或 fillChar | 视为空,hide |
 
